@@ -1,5 +1,6 @@
 $(document).ready(function () {
   var $connectButton = $("button.connect");
+  var batteryLevelCharacteristic;
 
   $connectButton.on("click", function () {
     navigator.bluetooth.requestDevice({ filters: [{ services: ['e659f300-ea98-11e3-ac10-0800200c9a66'] }]})
@@ -12,15 +13,14 @@ $(document).ready(function () {
       // Getting Battery Level...
       service.getCharacteristic('e659f303-ea98-11e3-ac10-0800200c9a66')
       .then(characteristic => {
-        characteristic.startNotifications()
-        .then(_ => {
-          characteristic.addEventListener(
-            'batteryvaluechanged',
-            updateBatteryValue
+        batteryLevelCharacteristic = characteristic;
+        batteryLevelCharacteristic.startNotifications().then(_ => {
+          batteryLevelCharacteristic.addEventListener(
+            'characteristicvaluechanged',
+            handleBatteryValueChanged
           );
         });
-        return characteristic.readValue()
-        .then(value => {
+        return batteryLevelCharacteristic.readValue().then(value => {
           console.log('Battery percentage is ' + value.getUint8(1));
           updateBatteryValue(value.getUint8(1));
         });
@@ -34,17 +34,29 @@ $(document).ready(function () {
         // Reading Odometer Level...
         return characteristic.readValue()
         .then(value => {
-          console.log('Odometer is ' + value.getUint8(1));
+          // console.log('Odometer is ' + value.getUint8(1));
           updateOdometerValue(value.getUint8(1));
         });
       })
+
+      service.getCharacteristics().then(characteristics => {
+        console.log('> Service: ' + service.uuid);
+        characteristics.forEach(characteristic => {
+          var myChar = characteristic;
+          myChar.readValue().then(value => {
+            console.log('>> Characteristic: ' + characteristic.uuid + ' value: ' + value.getUint8(1));
+          });;
+        });
+      });
     })
     .catch(error => { console.log(error); });
   });
 
   function handleBatteryValueChanged(event) {
     var value = event.target.value;
-    console.log('Battery ' + value);
+    var batteryLevel = value.getUint8(1);
+    console.log('Battery ' + batteryLevel);
+    updateBatteryValue(batteryLevel);
   }
 
   function updateBatteryValue(value) {
