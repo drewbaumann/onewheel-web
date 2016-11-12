@@ -1,6 +1,9 @@
 $(document).ready(function () {
-  var $connectButton = $("button.connect");
-  var batteryLevelCharacteristic;
+  var $connectButton = $("button.connect"),
+  $debugButton = $("button.debug");
+
+  var batteryLevelCharacteristic,
+    onewheelService;
 
   $connectButton.on("click", function () {
     navigator.bluetooth.requestDevice({ filters: [{ services: ['e659f300-ea98-11e3-ac10-0800200c9a66'] }]})
@@ -11,6 +14,7 @@ $(document).ready(function () {
     })
     .then(service => {
       // Getting Battery Level...
+      onewheelService = service;
       service.getCharacteristic('e659f303-ea98-11e3-ac10-0800200c9a66')
       .then(characteristic => {
         batteryLevelCharacteristic = characteristic;
@@ -23,6 +27,9 @@ $(document).ready(function () {
         return batteryLevelCharacteristic.readValue().then(value => {
           console.log('Battery percentage is ' + value.getUint8(1));
           updateBatteryValue(value.getUint8(1));
+        })
+        .catch(error => {
+          console.log('Argh! ' + error);
         });
       })
       .then(_ => {
@@ -38,18 +45,16 @@ $(document).ready(function () {
           updateOdometerValue(value.getUint8(1));
         });
       })
-
-      service.getCharacteristics().then(characteristics => {
-        console.log('> Service: ' + service.uuid);
-        characteristics.forEach(characteristic => {
-          var myChar = characteristic;
-          myChar.readValue().then(value => {
-            console.log('>> Characteristic: ' + characteristic.uuid + ' value: ' + value.getUint8(1));
-          });;
-        });
-      });
     })
     .catch(error => { console.log(error); });
+
+    if (getParameterByName("debug") == "true") {
+      $debugButton.show();
+    }
+  });
+
+  $debugButton.on("click", function () {
+    readValuesOfServices();
   });
 
   function handleBatteryValueChanged(event) {
@@ -67,5 +72,29 @@ $(document).ready(function () {
 
   function updateOdometerValue(value) {
     $("#odometer-number").html(value);
+  }
+
+  function readValuesOfServices() {
+    onewheelService.getCharacteristics().then(characteristics => {
+      console.log('> Service: ' + onewheelService.uuid);
+      characteristics.forEach(characteristic => {
+        var myChar = characteristic;
+        myChar.readValue().then(value => {
+          console.log('>> Characteristic: ' + characteristic.uuid + ' value: ' + value.getUint8(1));
+        });;
+      });
+    });
+  }
+
+  function getParameterByName(name, url) {
+    if (!url) {
+      url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
 });

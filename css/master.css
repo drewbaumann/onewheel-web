@@ -1,6 +1,32 @@
 body {
   background-color: #27C2D0;
 }
+
+button {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
 h1.title {
   font-family: 'Bungee Shade', cursive;
   color: #d027c3;
@@ -48,30 +74,6 @@ h1.title {
   z-index: 1100;
 }
 
-.title-container {
-  position: absolute;
-  z-index: 1000;
-  top: 20px;
-  left: 20px;
-  max-width: 300px;
-}
-
-.information {
-  position: absolute;
-  z-index: 1000;
-  top: 100px;
-  right: 20px;
-  max-width: 250px;
-}
-
-.road {
-  background-color: #DBD9D9;
-  max-width: 800px;
-  margin: 0 auto;
-  height: 100vh;
-  position: relative;
-}
-
 .divider-lines {
   width: 40px;
   margin: 0 auto;
@@ -84,6 +86,18 @@ h1.title {
   margin: 0 5px;
   background-color: yellow;
   height: 100vh;
+}
+
+.hidden {
+  display: none;
+}
+
+.information {
+  position: absolute;
+  z-index: 1000;
+  top: 100px;
+  right: 20px;
+  max-width: 250px;
 }
 
 .onewheel {
@@ -100,27 +114,18 @@ h1.title {
   text-align: center;
 }
 
-button {
-  color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-  touch-action: manipulation;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
+.title-container {
+  position: absolute;
+  z-index: 1000;
+  top: 20px;
+  left: 20px;
+  max-width: 300px;
+}
+
+.road {
+  background-color: #DBD9D9;
+  max-width: 800px;
+  margin: 0 auto;
+  height: 100vh;
+  position: relative;
 }
