@@ -3,7 +3,15 @@ $(document).ready(function () {
     $debugButton = $("button.debug");
 
   var batteryLevelCharacteristic,
-    onewheelService;
+    onewheelService,
+    initialBatteryLevel,
+    notificationPermission;
+
+  if (Notification.permission !== 'granted') {
+    Notification.requestPermission().then(function(result) {
+      notificationPermission = result;
+    });
+  }
 
   $connectButton.on("click", function () {
     navigator.bluetooth.requestDevice({ filters: [{ services: ['e659f300-ea98-11e3-ac10-0800200c9a66'] }]})
@@ -25,8 +33,9 @@ $(document).ready(function () {
           );
         });
         return batteryLevelCharacteristic.readValue().then(value => {
-          console.log('Battery percentage is ' + value.getUint8(1));
-          updateBatteryValue(value.getUint8(1));
+          initialBatteryLevel = value.getUint8(1);
+          console.log('Battery percentage is ' + initialBatteryLevel);
+          updateBatteryValue(initialBatteryLevel);
         })
         .catch(error => {
           console.log('Argh! ' + error);
@@ -68,6 +77,10 @@ $(document).ready(function () {
     $("#percent").html(value);
     var adjustedValue = value * 0.96;
     $('head').append('<style>.battery:before{width: ' + adjustedValue + '% !important;}</style>');
+
+    if (value == 100) {
+      notifyUserOfBatteryCompletion();
+    }
   }
 
   function updateOdometerValue(value) {
@@ -96,5 +109,27 @@ $(document).ready(function () {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
+  function notifyUserOfBatteryCompletion() {
+    var batteryNotificationMessage = "Your battery is at 100%. Ready to ride!";
+    var batteryNotificationOptions = {
+      icon: 'https://drewbaumann.github.io/onewheel-web/apple-icon.png',
+      body: batteryNotificationMessage,
+    };
+
+    if (!("Notification" in window)) {
+      alert("This browser does not support system notifications");
+    }
+    // Otherwise, we need to ask the user for permission
+    else if (notificationPermission !== 'denied') {
+      var notification = new Notification(
+        "Battery Ready",
+        batteryNotificationOptions
+      );
+    }
+    else {
+      Notification.requestPermission();
+    }
   }
 });
