@@ -90,7 +90,12 @@ $(document).ready(function () {
       characteristics.forEach(characteristic => {
         var myChar = characteristic;
         myChar.readValue().then(value => {
-          console.log('>> Characteristic: ' + characteristic.uuid + ' value: ' + value.getUint8(1));
+          console.log(
+            '>> Characteristic: ' +
+            characteristic.uuid +
+            ' value: ' +
+            value.getUint8(1)
+          );
         });;
       });
     });
