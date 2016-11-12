@@ -9,7 +9,7 @@ $(document).ready(function () {
   if (Notification.permission !== 'granted') {
     Notification.requestPermission();
   }
-  console.log("Document is ready.")
+  console.log("Document is ready.");
 
   $connectButton.on("click", function () {
     navigator.bluetooth.requestDevice({ filters: [{ services: ['e659f300-ea98-11e3-ac10-0800200c9a66'] }]})
