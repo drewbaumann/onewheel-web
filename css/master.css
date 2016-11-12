@@ -1,131 +1,86 @@
 body {
-  background-color: #27C2D0;
+  background-color: #404040;
+  background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230cf4ff' fill-opacity='0.21'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-button {
-  color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-  touch-action: manipulation;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-
-h1.title {
-  font-family: 'Bungee Shade', cursive;
+h1, h2, h3 {
   color: #d027c3;
-  font-size: 30px;
+  font-family: 'Bungee Shade', cursive;
+}
+
+h2.description {
+  color: #0cf4ff;
+}
+
+h3 a {
+  color: #0cf4ff;
+}
+
+h3 a:hover {
+  color: #d027c3;
+  text-decoration: none;
 }
 
 .battery{
-  position: relative;
-  margin: 0 auto;
-  margin-top: 20%;
-  width: 150px;
+  border-radius: 10px;
   border: 5px solid #d027c3;
   height: 50px;
-  border-radius: 10px;
+  position: relative;
   text-align: center;
+  width: 150px;
 }
 
 .battery:before{
-  content: '';
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  height: 44px;
-  width: 0%;
   background-color: #d027c3;
   border-radius: 3px;
+  content: '';
+  height: 34px;
+  left: 3px;
+  position: absolute;
+  top: 3px;
+  width: 0%;
 }
 
 .battery:after{
-  content: '';
-  position: absolute;
-  right: -13px;
-  top: 14px;
-  width: 10px;
-  height: 25px;
   background-color: #d027c3;
   border-radius: 3px;
+  content: '';
+  height: 25px;
+  position: absolute;
+  right: -13px;
+  top: 7px;
+  width: 10px;
 }
 
 .battery span {
+  color: #fff;
   font-family: 'Bungee Shade', cursive;
   font-size: 35px;
-  color: #fff;
+  line-height: 35px;
   position: relative;
   z-index: 1100;
 }
 
-.divider-lines {
-  width: 40px;
-  margin: 0 auto;
-  height: 100vh;
+.btn-wild {
+  background-color: #d027c3;
+  color: #fff;
 }
 
-.divider-line {
-  float: left;
-  width: 10px;
-  margin: 0 5px;
-  background-color: yellow;
-  height: 100vh;
+.btn-wild:hover {
+  background-color: #ba1aae;
+  color: #fff;
+}
+
+.debug {
+  display: none;
 }
 
 .hidden {
   display: none;
 }
 
-.information {
-  position: absolute;
-  z-index: 1000;
-  top: 100px;
-  right: 20px;
-  max-width: 250px;
-}
-
-.onewheel {
-  height: 40%;
-  position: absolute;
-  top: 300px;
-  z-index: 1000;
-}
-
-.odometer .odo-container, .odometer h2 {
-  font-family: 'Bungee Shade', cursive;
+.odo-container span {
   color: #d027c3;
+  font-family: 'Bungee Shade', cursive;
   font-size: 30px;
-  text-align: center;
-}
-
-.title-container {
-  position: absolute;
-  z-index: 1000;
-  top: 20px;
-  left: 20px;
-  max-width: 300px;
-}
-
-.road {
-  background-color: #DBD9D9;
-  max-width: 800px;
-  margin: 0 auto;
-  height: 100vh;
-  position: relative;
 }

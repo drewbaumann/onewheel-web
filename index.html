@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <title>Onewheel for the web</title>
-    <link rel="stylesheet" href="css/master.css" media="screen" title="no title">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/master.css" media="screen" title="master">
+    <link rel="stylesheet" href="css/spacing.css" media="screen">
     <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
     <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
       crossorigin="anonymous">
     </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="script/master.js" charset="utf-8"></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -20,6 +24,7 @@
       ga('create', 'UA-59160038-2', 'auto');
       ga('send', 'pageview');
     </script>
+
     <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
@@ -39,28 +44,44 @@
     <meta name="theme-color" content="#ffffff">
   </head>
   <body>
-    <section class="road">
-      <div class="title-container">
-        <h1 class="title">Onewheel Web Test</h1>
-        <button type="button" class="connect">Connect to Onewheel</button>
-        <button type="button" class="debug hidden">Debug Values</button>
+    <div class="container-fluid">
+      <h1>Onewheel Web Test</h1>
+      <h3>Created By <a href="http://drewbaumann.com">Drew Baumann</a></h3>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8">
+          <button type="button" class="btn btn-wild connect">
+            Connect to Onewheel
+          </button>
+        </div>
       </div>
 
-      <div class="information">
-        <div class="battery"><span id="percent">0</span><span>%</span></div>
-        <div class="odometer">
-          <h2>Lifetime Odometer Reading:</h2>
-          <div class="odo-container">
-            <span id="odometer-number">0</span><span> Miles</span>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8">
+          <button type="button" class="btn btn-info debug">
+            Debug Values
+          </button>
+        </div>
+      </div>
+
+      <div class="row spacer-top-4">
+        <div class="col-xs-12 col-sm-6 col-md-8">
+          <h2 class="description">Battery</h2>
+          <div class="battery">
+            <span id="percent">0</span><span>%</span>
           </div>
         </div>
       </div>
 
-      <svg class= "onewheel" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="575 572 208 586" width="208" height="586"><rect x="575" y="572" width="18" height="586" transform="matrix(1,0,0,1,0,0)" fill="rgb(38,176,204)" stroke-width="1" stroke="rgba(0,0,0,0)" stroke-linejoin="miter" stroke-linecap="square"/><rect x="765" y="572" width="18" height="586" transform="matrix(1,0,0,1,0,0)" fill="rgb(38,176,204)" stroke-width="1" stroke="rgba(0,0,0,0)" stroke-linejoin="miter" stroke-linecap="square"/><rect x="593" y="572" width="172" height="180.48800000000006" transform="matrix(1,0,0,1,0,0)" fill="rgb(78,77,73)" stroke-width="1" stroke="rgba(0,0,0,0)" stroke-linejoin="miter" stroke-linecap="square"/><rect x="593" y="976.34" width="172" height="180.48799999999994" transform="matrix(1,0,0,1,0,0)" fill="rgb(78,77,73)" stroke-width="1" stroke="rgba(0,0,0,0)" stroke-linejoin="miter" stroke-linecap="square"/><rect rx="50.201174434536306" ry="50.201174434536306" x="593" y="760" width="172" height="208" transform="matrix(1,0,0,1,0,0)" fill="rgb(31,31,31)" stroke-width="1" stroke="rgba(0,0,0,0)" stroke-linejoin="miter" stroke-linecap="square"/></svg>
-      <div class="divider-lines">
-        <div class="divider-line"></div>
-        <div class="divider-line"></div>
+      <div class="row spacer-top-4">
+        <div class="col-xs-12 col-sm-6 col-md-8">
+          <h2 class="description">Lifetime Odometer Reading</h2>
+            <div class="odo-container">
+              <span id="odometer-number">0</span><span> Miles</span>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
+
+    </div>
   </body>
 </html>
