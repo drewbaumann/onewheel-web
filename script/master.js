@@ -4,13 +4,10 @@ $(document).ready(function () {
 
   var batteryLevelCharacteristic,
     onewheelService,
-    initialBatteryLevel,
-    notificationPermission;
+    initialBatteryLevel;
 
   if (Notification.permission !== 'granted') {
-    Notification.requestPermission().then(function(result) {
-      notificationPermission = result;
-    });
+    Notification.requestPermission();
   }
 
   $connectButton.on("click", function () {
@@ -119,10 +116,10 @@ $(document).ready(function () {
     };
 
     if (!("Notification" in window)) {
-      alert("This browser does not support system notifications");
+      alert(batteryNotificationMessage);
     }
     // Otherwise, we need to ask the user for permission
-    else if (notificationPermission !== 'denied') {
+    else if (Notification.permission !== 'denied') {
       var notification = new Notification(
         "Battery Ready",
         batteryNotificationOptions
