@@ -16,7 +16,7 @@ $(document).ready(function () {
         .then(_ => {
           characteristic.addEventListener(
             'batteryvaluechanged',
-            handleBatteryValueChanged
+            updateBatteryValue
           );
         });
         return characteristic.readValue()
