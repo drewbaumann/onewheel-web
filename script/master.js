@@ -1,6 +1,6 @@
 $(document).ready(function () {
   var $connectButton = $("button.connect"),
-  $debugButton = $("button.debug");
+    $debugButton = $("button.debug");
 
   var batteryLevelCharacteristic,
     onewheelService;
@@ -58,9 +58,9 @@ $(document).ready(function () {
   });
 
   function handleBatteryValueChanged(event) {
-    var value = event.target.value;
-    var batteryLevel = value.getUint8(1);
-    console.log('Battery ' + batteryLevel);
+    var value = event.target.value,
+      batteryLevel = value.getUint8(1);
+    console.log('Battery updated to: ' + batteryLevel);
     updateBatteryValue(batteryLevel);
   }
 
