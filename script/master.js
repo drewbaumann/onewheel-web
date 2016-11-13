@@ -108,7 +108,7 @@ $(document).ready(function () {
     }
   }
 
-  function updateFirmwareRevisionValue() {
+  function updateFirmwareRevisionValue(value) {
     $("#firmware-revision").html(value);
   }
 
