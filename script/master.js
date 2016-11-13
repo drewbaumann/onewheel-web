@@ -45,13 +45,40 @@ $(document).ready(function () {
 
       service.getCharacteristic('e659f319-ea98-11e3-ac10-0800200c9a66')
       .then(characteristic => {
-        // Reading Odometer Level...
+        // Reading Odometer Level
         return characteristic.readValue()
         .then(value => {
-          // console.log('Odometer is ' + value.getUint8(1));
           updateOdometerValue(value.getUint16());
         });
       })
+
+      service.getCharacteristic('e659f301-ea98-11e3-ac10-0800200c9a66')
+      .then(characteristic => {
+        // Reading Serial Number
+        return characteristic.readValue()
+        .then(value => {
+          updateSerialNumberValue(value.getUint16());
+        });
+      })
+
+      service.getCharacteristic('e659f318-ea98-11e3-ac10-0800200c9a66')
+      .then(characteristic => {
+        // Reading Hardware Revision #
+        return characteristic.readValue()
+        .then(value => {
+          updateHardwareRevisionValue(value.getUint16());
+        });
+      })
+
+      service.getCharacteristic('e659f318-ea98-11e3-ac10-0800200c9a66')
+      .then(characteristic => {
+        // Reading Hardware Revision #
+        return characteristic.readValue()
+        .then(value => {
+          updateFirmwareRevisionValue(value.getUint16());
+        });
+      })
+
     })
     .catch(error => { console.log(error); });
 
@@ -72,7 +99,7 @@ $(document).ready(function () {
   }
 
   function updateBatteryValue(value) {
-    $("#percent").html(value);
+    $("#battery-percent").html(value + "%");
     var adjustedValue = value * 0.96;
     $('head').append('<style>.battery:before{width: ' + adjustedValue + '% !important;}</style>');
 
@@ -81,8 +108,20 @@ $(document).ready(function () {
     }
   }
 
+  function updateFirmwareRevisionValue() {
+    $("#firmware-revision").html(value);
+  }
+
+  function updateHardwareRevisionValue(value) {
+    $("#hardware-revision").html(value);
+  }
+
   function updateOdometerValue(value) {
-    $("#odometer-number").html(value);
+    $("#odometer-number").html(value + " Miles");
+  }
+
+  function updateSerialNumberValue(value) {
+    $("#serial-number").html(value);
   }
 
   function readValuesOfServices() {
