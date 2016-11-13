@@ -70,9 +70,9 @@ $(document).ready(function () {
         });
       })
 
-      service.getCharacteristic('e659f318-ea98-11e3-ac10-0800200c9a66')
+      service.getCharacteristic('e659f311-ea98-11e3-ac10-0800200c9a66')
       .then(characteristic => {
-        // Reading Hardware Revision #
+        // Reading Firmware Revision #
         return characteristic.readValue()
         .then(value => {
           updateFirmwareRevisionValue(value.getUint16());
