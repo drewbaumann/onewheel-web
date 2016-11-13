@@ -31,7 +31,7 @@ $(document).ready(function () {
           );
         });
         return batteryLevelCharacteristic.readValue().then(value => {
-          initialBatteryLevel = value.getUint8(1);
+          initialBatteryLevel = value.getUint16();
           console.log('Battery percentage is ' + initialBatteryLevel);
           updateBatteryValue(initialBatteryLevel);
         })
@@ -49,7 +49,7 @@ $(document).ready(function () {
         return characteristic.readValue()
         .then(value => {
           // console.log('Odometer is ' + value.getUint8(1));
-          updateOdometerValue(value.getUint8(1));
+          updateOdometerValue(value.getUint16());
         });
       })
     })
@@ -66,7 +66,7 @@ $(document).ready(function () {
 
   function handleBatteryValueChanged(event) {
     var value = event.target.value,
-      batteryLevel = value.getUint8(1);
+      batteryLevel = value.getUint16();
     console.log('Battery updated to: ' + batteryLevel);
     updateBatteryValue(batteryLevel);
   }
@@ -95,7 +95,7 @@ $(document).ready(function () {
             '>> Characteristic: ' +
             characteristic.uuid +
             ' value: ' +
-            value.getUint8(1)
+            value.getUint16()
           );
         });;
       });
