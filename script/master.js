@@ -79,6 +79,15 @@ $(document).ready(function () {
         });
       })
 
+      service.getCharacteristic('e659f302-ea98-11e3-ac10-0800200c9a66')
+      .then(characteristic => {
+        // Reading Ride Mode #
+        return characteristic.readValue()
+        .then(value => {
+          updateRideModeValue(value.getUint16());
+        });
+      })
+
     })
     .catch(error => { console.log(error); });
 
@@ -120,6 +129,10 @@ $(document).ready(function () {
     $("#odometer-number").html(value + " Miles");
   }
 
+  function updateRideModeValue(value) {
+    $("#ride-mode").html(value);
+  }
+
   function updateSerialNumberValue(value) {
     $("#serial-number").html(value);
   }
@@ -139,6 +152,15 @@ $(document).ready(function () {
         });;
       });
     });
+  }
+
+  function toggleLight() {
+    onewheelService.getCharacteristic('e659f30d-ea98-11e3-ac10-0800200c9a66')
+    .then(characteristic => {
+      // Reading Odometer Level
+      let lightOn = new Uint16Array([15360]);
+      return characteristic.writeValue(lightOn);
+    })
   }
 
   function getParameterByName(name, url) {
