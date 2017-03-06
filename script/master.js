@@ -130,7 +130,29 @@ $(document).ready(function () {
   }
 
   function updateRideModeValue(value) {
-    $("#ride-mode").html(value);
+    switch (value) {
+      case 1:
+        mode = "Classic (1)";
+        break;
+      case 2:
+        mode = "Extreme (2)";
+        break;
+      case 3:
+        mode = "Elevated (3)";
+        break;
+      case 4:
+        mode = "Classic (4)";
+        break;
+      case 5:
+        mode = "??? (5)";
+        break;
+      case 6:
+        mode = "Extreme (6)";
+        break;
+      default:
+        mode = value;
+    }
+    $("#ride-mode").html(mode);
   }
 
   function updateSerialNumberValue(value) {
